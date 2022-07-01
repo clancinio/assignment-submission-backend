@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: "assignment-submission-app"
+  datasource:
+    url: "jdbc:mysql://localhost:3306/assignment_submission_db"
+    username: "root"
+    password: "password123"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
