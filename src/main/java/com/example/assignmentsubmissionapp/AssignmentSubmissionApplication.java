@@ -13,13 +13,13 @@ public class AssignmentSubmissionApplication {
 		SpringApplication.run(AssignmentSubmissionApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer configure() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry reg) {
-				reg.addMapping("/**").allowedOrigins("*");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer configure() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+//			}
+//		};
+//	}
 }
