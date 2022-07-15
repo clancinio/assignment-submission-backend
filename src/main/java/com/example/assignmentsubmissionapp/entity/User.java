@@ -24,14 +24,12 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private LocalDate cohortStartDate;
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Authority> authorities = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // An Authority is a Role
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new Authority("ROLE_STUDENT"));
-        return roles;
+        return authorities;
     }
 
     @Override

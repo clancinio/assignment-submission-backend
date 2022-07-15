@@ -26,6 +26,11 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
+    public Assignment save(Assignment assignment) {
+        return assignmentRepo.save(assignment);
+    }
+
+    @Override
     public List<Assignment> getAssignments(User user) {
         return assignmentRepo.findByUser(user);
     }

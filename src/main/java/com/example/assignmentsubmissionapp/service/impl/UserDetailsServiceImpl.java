@@ -2,6 +2,7 @@ package com.example.assignmentsubmissionapp.service.impl;
 
 import com.example.assignmentsubmissionapp.dto.RegisterRequest;
 import com.example.assignmentsubmissionapp.dto.RegistrationResponse;
+import com.example.assignmentsubmissionapp.entity.Authority;
 import com.example.assignmentsubmissionapp.entity.User;
 import com.example.assignmentsubmissionapp.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             } else {
                 userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
                 User user = userRepository.save(userEntity);
+
                 return new RegistrationResponse(user.getUsername());
             }
         } catch (final Exception exception) {

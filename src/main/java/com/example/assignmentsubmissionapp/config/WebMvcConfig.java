@@ -14,7 +14,10 @@ public class WebMvcConfig
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").exposedHeaders();
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .exposedHeaders()
+                        .allowedMethods("PUT", "DELETE", "GET", "POST", "OPTIONS");
             }
         };
     }

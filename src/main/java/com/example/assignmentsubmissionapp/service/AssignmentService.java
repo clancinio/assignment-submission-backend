@@ -10,7 +10,10 @@ public interface AssignmentService {
 
     Assignment save(User user);
 
+    Assignment save(Assignment assignment);
+
     List<Assignment> getAssignments(User user);
 
     Optional<Assignment> getAssignmentById(Long assignmentId);
+
 }
