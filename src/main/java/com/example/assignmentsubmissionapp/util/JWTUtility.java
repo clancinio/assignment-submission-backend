@@ -1,14 +1,12 @@
 package com.example.assignmentsubmissionapp.util;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import java.security.SignatureException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +17,13 @@ public class JWTUtility {
 
     private static final long serialVersionUID = 234234523523L;
 
-    public static final long JWT_TOKEN_VALIDITY = 60;
+    private static final long JWT_TOKEN_VALIDITY = 7 * 60 * 60;
+
+    private static final String SUPER_SECRET = "aSuperSecretSrtiNg";
 
     // We need a signing key, so we'll create one just for this example. Usually
     // the key would be read from your application configuration instead.
-    Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    //Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
@@ -42,7 +42,8 @@ public class JWTUtility {
 
     //for retrieving any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+            Claims claims =  Jwts.parser().setSigningKey(SUPER_SECRET).parseClaimsJws(token).getBody();
+            return claims;
     }
 
     //check if the token has expired
@@ -63,7 +64,7 @@ public class JWTUtility {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(secretKey).compact();
+                .signWith(SignatureAlgorithm.HS512, SUPER_SECRET).compact();
     }
 
     //validate token
