@@ -2,6 +2,7 @@ package com.example.assignmentsubmissionapp.service.impl;
 
 import com.example.assignmentsubmissionapp.entity.Assignment;
 import com.example.assignmentsubmissionapp.entity.User;
+import com.example.assignmentsubmissionapp.enums.AssignmentStatusEnum;
 import com.example.assignmentsubmissionapp.repository.AssignmentRepository;
 import com.example.assignmentsubmissionapp.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public Assignment save(User user) {
         Assignment assignment = new Assignment();
-        assignment.setStatus("Not submitted");
+        assignment.setStatus(AssignmentStatusEnum.PENDING_SUBMISSION.getStatus());
         assignment.setUser(user);
 
         return assignmentRepo.save(assignment);

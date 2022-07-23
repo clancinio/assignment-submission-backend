@@ -1,5 +1,6 @@
 package com.example.assignmentsubmissionapp.rest;
 
+import com.example.assignmentsubmissionapp.dto.AssignmentResponse;
 import com.example.assignmentsubmissionapp.entity.Assignment;
 import com.example.assignmentsubmissionapp.entity.User;
 import com.example.assignmentsubmissionapp.service.AssignmentService;
@@ -30,7 +31,9 @@ public class AssignmentController {
     @GetMapping("{assignmentId}")
     public ResponseEntity<?> getAssignment(@PathVariable Long assignmentId) {
         Optional<Assignment> assignmentOpt = assignmentService.getAssignmentById(assignmentId);
-        return ResponseEntity.ok(assignmentOpt.orElse(new Assignment()));
+        AssignmentResponse response = new AssignmentResponse();
+        response.setAssignment(assignmentOpt.orElse(new Assignment()));
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("{assignmentId}")
