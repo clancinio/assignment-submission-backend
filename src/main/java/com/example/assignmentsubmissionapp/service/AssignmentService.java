@@ -17,4 +17,5 @@ public interface AssignmentService {
 
     Optional<Assignment> getAssignmentById(Long assignmentId);
 
+    Assignment assignAssignment(Assignment assignment, User user);
 }

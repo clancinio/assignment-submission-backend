@@ -4,6 +4,7 @@ import com.example.assignmentsubmissionapp.dto.RegisterRequest;
 import com.example.assignmentsubmissionapp.dto.RegistrationResponse;
 import com.example.assignmentsubmissionapp.entity.Authority;
 import com.example.assignmentsubmissionapp.entity.User;
+import com.example.assignmentsubmissionapp.repository.AuthorityRepository;
 import com.example.assignmentsubmissionapp.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     final private UserRepository userRepository;
+
+    final private AuthorityRepository authorityRepository;
 
     final PasswordEncoder passwordEncoder;
 
@@ -42,6 +45,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             } else {
                 userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
                 User user = userRepository.save(userEntity);
+                Authority authority = new Authority();
+                authority.setAuthority("ROLE_STUDENT");
+                authority.setUser(user);
+                authorityRepository.save(authority);
 
                 return new RegistrationResponse(user.getUsername());
             }

@@ -1,5 +1,6 @@
 package com.example.assignmentsubmissionapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private LocalDate cohortStartDate;
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Authority> authorities = new ArrayList<>();
 

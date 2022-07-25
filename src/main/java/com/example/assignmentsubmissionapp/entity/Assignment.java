@@ -18,5 +18,6 @@ public class Assignment {
     private String codeReviewVideoUrl;
     @ManyToOne(optional = false)
     private User user;
-    //private User assignedTo;
+    @ManyToOne
+    private User codeReviewer;
 }

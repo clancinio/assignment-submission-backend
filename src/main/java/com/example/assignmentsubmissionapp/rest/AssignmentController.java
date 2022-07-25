@@ -42,6 +42,14 @@ public class AssignmentController {
         return ResponseEntity.ok(updatedAssignment);
     }
 
+    @PutMapping("/claim")
+    public ResponseEntity<Assignment> assignAssignment(
+            @RequestBody Assignment assignment,
+            @AuthenticationPrincipal User user) {
+        Assignment updatedAssignment = assignmentService.assignAssignment(assignment, user);
+        return ResponseEntity.ok(updatedAssignment);
+    }
+
     @PostMapping("")
     public ResponseEntity<Assignment> createAssignment(@AuthenticationPrincipal User user) {
         Assignment newAssignment = assignmentService.save(user);
