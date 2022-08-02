@@ -1,6 +1,7 @@
 package com.example.assignmentsubmissionapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import java.time.ZonedDateTime;
 
 @Data
 @Entity
-@NoArgsConstructor
+@Builder
 @Table(name = "comments")
 public class Comment {
 
