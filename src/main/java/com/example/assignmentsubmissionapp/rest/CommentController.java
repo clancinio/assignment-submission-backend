@@ -7,10 +7,10 @@ import com.example.assignmentsubmissionapp.service.impl.CommentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,5 +23,13 @@ public class CommentController {
     public ResponseEntity<Comment> createComment(@RequestBody CommentRequest commentRequest, @AuthenticationPrincipal User user) {
         Comment comment = commentService.save(commentRequest, user);
         return ResponseEntity.ok(comment);
+    }
+
+    @GetMapping("{assignmentId}")
+    public ResponseEntity<Set<Comment>> getCommentsByAssignment(@PathVariable Long assignmentId) {
+        System.out.println("AssignmentID: " + assignmentId);
+        Set<Comment> comments = commentService.getCommentsByAssignmentId(assignmentId);
+
+        return ResponseEntity.ok(comments);
     }
 }

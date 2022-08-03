@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +33,12 @@ public class CommentServiceImpl implements CommentService {
                 .build();
 
         return commentRepository.save(comment);
+    }
+
+    @Override
+    public Set<Comment> getCommentsByAssignmentId(Long assignmentId) {
+        Set<Comment> comments = commentRepository.findByAssignmentId(assignmentId);
+        System.out.println(comments);
+        return comments;
     }
 }

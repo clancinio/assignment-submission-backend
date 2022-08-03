@@ -9,7 +9,7 @@ spring:
     username: "root"
     password: "password123"
   jpa:
-    show-sql: true
+#    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
