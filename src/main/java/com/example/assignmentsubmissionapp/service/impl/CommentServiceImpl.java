@@ -25,13 +25,19 @@ public class CommentServiceImpl implements CommentService {
     public Comment save(CommentRequest commentRequest, User user) {
         Assignment assignment = assignmentRepo.getReferenceById(commentRequest.getAssignmentId());
 
-        Comment comment = Comment.builder()
+        Comment.CommentBuilder commentBuilder = Comment.builder();
+        commentBuilder
+                .id(commentRequest.getId())
                 .commentText(commentRequest.getCommentText())
                 .assignment(assignment)
-                .createdBy(user)
-                .createdDate(ZonedDateTime.now())
-                .build();
+                .createdBy(user);
 
+                if(commentRequest.getId() == null) {
+                commentBuilder.createdDate(ZonedDateTime.now());
+                }
+
+        Comment comment = commentBuilder.build();
+        System.out.println(comment);
         return commentRepository.save(comment);
     }
 
